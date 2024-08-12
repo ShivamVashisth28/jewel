@@ -63,10 +63,11 @@ function Home() {
         })
 
         gsap.to(necklaceRef.current,{
-            y:"263%",
-            x:"149%",
+            y:"109vh",
+            x:"31vw",
             duration:2.2,
             scale:0.3,
+           
             scrollTrigger:{
                 trigger:'.move3',
                 scroller:"body",
@@ -142,7 +143,7 @@ return (
                 </div>
             </div>
             <div className='h-full w-2/6 flex justify-center items-center'>
-                <div className='h-5/6 w-full   '>
+                <div className='h-5/6 w-full  '>
                     <img className='  rounded-tl-[55%]'  src="saaree.jpg" alt="" /> 
                 </div>
             </div>
