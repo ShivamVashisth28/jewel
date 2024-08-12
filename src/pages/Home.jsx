@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
-import { motion} from 'framer-motion'
+import { animate, motion} from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,7 +12,10 @@ function Home() {
     const circleRef = useRef()
     const necklaceRef = useRef()
     const [canCircleMove, setCanCircleMove] = useState(false)
-    console.log(ScrollTrigger)
+    const [leftJhumkaArray , setLeftJhumkaArray ] = useState(1)
+    const [rightJhumkaArray , setRightJhumkaArray ] = useState(4)
+    const [jhumkaNumber , setJhumkaNumber] = useState(2);
+    
 
 
     const moveCircle = (e) =>{
@@ -73,6 +76,8 @@ function Home() {
                 scrub:2,
             }
         })
+
+        
 
 
     })
@@ -138,12 +143,25 @@ return (
             </div>
             <div className='h-full w-2/6 flex justify-center items-center'>
                 <div className='h-5/6 w-full   '>
-                    <img className='  rounded-tl-[200px]'  src="saaree.jpg" alt="" /> 
+                    <img className='  rounded-tl-[55%]'  src="saaree.jpg" alt="" /> 
                 </div>
             </div>
         </div>
 
-        <div className="flex flex-col h-screen w-screen bg-orange-300">
+        <motion.div 
+            initial={{
+                opacity:0,
+                x:-100
+            }}
+            transition={{
+                duration:2,
+                ease:'easeInOut'
+            }}
+            whileInView={{
+                opacity:1,
+                x:0
+            }}
+            className="page-3 flex flex-col h-screen w-screen bg-orange-300">
                 <div className='h-[20vh] w-full  flex'>
                     <div className='h-full w-1/2  flex items-center justify-center'>
                         <div className=" text-[10vh] moranga-font ">EARRINGS</div>
@@ -153,24 +171,39 @@ return (
                     </div>
                 </div>
                 <div className='h-full w-full flex '>
-                    <div className="h-full w-[40%]  flex justify-center items-center">
+                    <div className="h-full w-[40%]  flex justify-center items-center relative">
+                        <img src={`/single_earring/earring-${jhumkaNumber}.png`} className='absolute top-[31vh] left-[13vw]'/>
                         <img className='h-[95%] w-[70%]' src="face-1.png" alt="" />
                     </div>
                     <div className="h-full w-[60%] flex flex-col  items-center bottom-0">
                         <div className="text-3xl text-center pt-10 moranga-font ">TRY NOW</div>
                         <div className="h-[90%] w-[90%] flex justify-evenly items-center">
-                            <div className="h-[80%] w-[40%] bg-yellow-100 rounded-t-full border-2 border-black flex items-center justify-center ">
-                                <img src="earring-1.png" alt="" className='h-3/4' />
+                            <div className="h-[80%] w-[40%] bg-yellow-100 rounded-t-full border-2 border-black flex items-center justify-center cursor-pointer">
+                                <img 
+                                    onClick={()=>{
+                                        setLeftJhumkaArray((prev) => (prev+1)%3 +1 )
+                                        setJhumkaNumber(leftJhumkaArray)
+                                    }} 
+                                    src={`earring-${leftJhumkaArray}.png`}  
+                                     
+                                    
+                                    />
                             </div>
-                            <div className="h-[80%] w-[40%] bg-yellow-100 rounded-t-full border-2 border-black flex items-center justify-center ">
-                                <img src="earring-2.png" alt="" className='h-3/4' />
+                            <div className="h-[80%] w-[40%] bg-yellow-100 rounded-t-full border-2 border-black flex items-center justify-center cursor-pointer">
+                                <img  
+                                    onClick={()=>{
+                                        setRightJhumkaArray((prev) => (prev+1)%3 +4 )
+                                        setJhumkaNumber(rightJhumkaArray)
+                                    }} 
+                                    src={`earring-${rightJhumkaArray}.png`}  
+                                     />
                             </div>
                         </div>
                     </div>
                 </div>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col h-screen w-screen bg-orange-300">
+        {/* <div className="flex flex-col h-screen w-screen bg-orange-300">
                <div className=' font-serif text-6xl pt-10  text-center moranga-font '>
                     COLLECTIONS
                </div>
@@ -186,9 +219,9 @@ return (
                     
                     </div>
                </div>
-        </div>
+        </div> */}
 
-        <div className="flex flex-col h-screen w-screen bg-orange-300">
+        {/* <div className="flex flex-col h-screen w-screen bg-orange-300">
                <div className="flex h-[80%] pt-10 w-full ">
                     <div className="h-full w-3/6 pt-20 ">
                         
@@ -228,7 +261,7 @@ return (
                <div className="bg-black h-[25%] text-white">
                 Footer
                </div>
-        </div>
+        </div> */}
 
         
     </div>
