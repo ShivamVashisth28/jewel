@@ -63,8 +63,8 @@ function Home() {
         })
 
         gsap.to(necklaceRef.current,{
-            y:840,
-            x:478,
+            y:"263%",
+            x:"149%",
             duration:2.2,
             scale:0.3,
             scrollTrigger:{
