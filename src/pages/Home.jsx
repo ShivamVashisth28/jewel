@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { animate, motion} from 'framer-motion'
 import { useGSAP } from '@gsap/react'
@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 function Home() {
     const circleRef = useRef()
     const necklaceRef = useRef()
+    const necklaceRef2 = useRef()
     const [canCircleMove, setCanCircleMove] = useState(false)
     const [leftJhumkaArray , setLeftJhumkaArray ] = useState(1)
     const [rightJhumkaArray , setRightJhumkaArray ] = useState(4)
@@ -27,7 +28,10 @@ function Home() {
 
     
 
+    
     useGSAP(()=>{
+
+        
         gsap.from('.move1',{
             opacity:0,
             duration:1,
@@ -63,10 +67,13 @@ function Home() {
         })
 
         gsap.to(necklaceRef.current,{
-            y:"109vh",
-            x:"31vw",
+            y:"110vh",
+            x:"28.75vw",
+           
             duration:2.2,
-            scale:0.3,
+            scale:0.25,
+            opacity:0,
+            
            
             scrollTrigger:{
                 trigger:'.move3',
@@ -77,6 +84,26 @@ function Home() {
                 scrub:2,
             }
         })
+
+        gsap.from(necklaceRef2.current,{
+           
+           
+            x:'-10vw',
+
+            y:'-30vh',
+            opacity:0,
+            
+           
+            scrollTrigger:{
+                trigger:'.move3',
+                scroller:"body",
+                // markers:true,    
+                start:'top 40%',
+                end:"top -30%",
+                scrub:2,
+            }
+        })
+        
 
         
 
@@ -142,11 +169,11 @@ return (
                     </div>
                 </div>
             </div>
-            <div className='h-full w-2/6 flex justify-center items-center'>
-                <div className='h-5/6 w-full  '>
-                    <img className='  rounded-tl-[55%]'  src="saaree.jpg" alt="" /> 
-                </div>
+            <div className='relative h-full   w-2/6  '>
+                <img   className='absolute  rounded-tl-[55%] h-5/6 -z-10 bottom-0'  src="saaree.jpg" alt="" />
+                <img ref={necklaceRef2} className='absolute top-[49%] h-[12%] left-[29%] '  src="necklace-1.png" alt="" />
             </div>
+            
         </div>
 
         <motion.div 
